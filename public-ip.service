@@ -1,0 +1,16 @@
+[Unit]
+Wants=network-online.target
+After=network.target network-online.target
+Description=public-ip
+
+[Service]
+EnvironmentFile=/opt/tomodev/public-ip/.env
+Type=forking
+WorkingDirectory=/opt/tomodev/public-ip
+ExecStart=/opt/tomodev/public-ip/public-ip.sh start
+ExecStop=/opt/tomodev/public-ip/public-ip.sh stop
+ExecReload=/opt/tomodev/public-ip/public-ip.sh restart
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
